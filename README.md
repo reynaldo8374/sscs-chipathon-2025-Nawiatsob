@@ -83,3 +83,7 @@ The truth table for a 4:1 MUX is:
 
 ## License
 This project is intended for educational purposes in digital IC design using standard cell libraries.
+
+## Links
+Tracking sheets:
+https://docs.google.com/spreadsheets/d/1sVi-iYNIls3bni4GYa2EcIpRoHsRM33AFb4rUEtLEvo/edit?gid=0#gid=0
