@@ -22,6 +22,8 @@ N 450 -260 450 -230 {lab=s1}
 N 300 -220 300 -210 {lab=s0}
 N 300 -220 480 -220 {lab=s0}
 N 480 -330 480 -220 {lab=s0}
+N 590 -450 590 -420 {lab=out}
+N 590 -360 590 -320 {lab=GND}
 C {title.sym} 160 -40 0 0 {name=l1 author="Nawiatsob-Rey"}
 C {vsource.sym} 180 -180 0 0 {name=V1 value=3.3 savecurrent=false}
 C {vsource.sym} 120 -280 0 0 {name=V2 value=3.3 savecurrent=false}
@@ -50,55 +52,47 @@ value="
 .include $::180MCU_MODELS/design.ngspice
 .lib $::180MCU_MODELS/sm141064.ngspice typical
 "}
-C {devices/code_shown.sym} 690 -1170 0 0 {name=NGSPICE only_toplevel=true
+C {devices/code_shown.sym} 715 -945 0 0 {name=NGSPICE only_toplevel=true
 value="
 .control
 save all
 
-let fsig = 1000k
-let tper = 1/fsig
-let tfr = 0.01*tper
-let ton = 0.5*tper-2*tfr
+let VDD = 3.3
+let idx = 0
+let total_leakage = 0
 
-* Define timing parameters
-* let ttrans = 2m         ; waktu transisi simultan
-*let trf = 10n           ; waktu rise/fall
-*let ton = 500u          ; waktu sinyal tetap di level tinggi
-*let per = 4m            ; periode pulsa
-let tstop = 20*tper          ; total waktu simulasi
-let tstep = 0.001*tper          ; resolusi waktu simulasinya
-let tsem = 3*tper
-let tkol = 0.5*tsem-2*tfr
+repeat 64
+  let logic_A = (($&idx)%2)
+  let logic_B = ((floor($&idx/2))%2)
+  let logic_C = ((floor($&idx/4))%2)
+  let logic_D = ((floor($&idx/8))%2)
+  let logic_s0 = ((floor($&idx/16))%2)
+  let logic_s1 = ((floor($&idx/32))%2)
+  let a = logic_A*VDD
+  let b = logic_B*VDD
+  let c = logic_C*VDD
+  let d = logic_D*VDD
+  let s0 = logic_s0*VDD
+  let s1 = logic_s1*VDD
+  alter @V2[dc] = $&a
+  alter @V3[dc] = $&b
+  alter @V4[dc] = $&c
+  alter @V5[dc] = $&d
+  alter @V6[dc] = $&s0
+  alter @V7[dc] = $&s1
+  op
+  echo input combination s1s0dcba = $&logic_s1$&logic_s0$&logic_D$&logic_C$&logic_B$&logic_A
+  let leakage_power = abs(I(V1))*VDD
+  let total_leakage = total_leakage + leakage_power
+  print leakage_power
+  let idx = $&idx + 1
+end
 
-let tv4s = 2*tper
-let tv5s = 1.5*tper
+let avg_leakage_power = total_leakage/64
+print avg_leakage_power
 
-let tv4k = 0.5*tv4s-2*tfr
-let tv5k = 0.5*tv5s-2*tfr
-
-* Set constant input data untuk mux
-alter @V2[DC] = 0     ; i0
-alter @V3[DC] = 3.3    ; i1
-alter @V4[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&tv4k $&tv4s 0 ]
-alter @V5[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&tv5k $&tv5s 0 ]
-
-* Set S0 (V6): 0 -> 3.3V, mulai di ttrans
-alter @V6[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&tkol $&tsem 0 ]
-
-* Set S1 (V7): 3.3 -> 0V, mulai di ttrans
-alter @V7[PULSE] = [ 3.3 0 0 $&tfr $&tfr $&ton $&tper 0 ]
-
-* Simulasi
-op
-tran $&tstep $&tstop
-
-* Plot output dan selector
-plot v(out)+30 v(s0)+20 v(s1)+25 v(i0) v(i1)+5 v(i2)+10 v(i3)+15  
-
-write mux4_tb.raw
 .endc
 "}
-C {test_4mux/mux4.sym} 740 -460 0 0 {name=x1}
 C {lab_wire.sym} 120 -250 0 0 {name=p8 sig_type=std_logic lab=GND}
 C {lab_wire.sym} 180 -250 0 0 {name=p9 sig_type=std_logic lab=GND}
 C {lab_wire.sym} 240 -250 0 0 {name=p10 sig_type=std_logic lab=GND}
@@ -108,3 +102,10 @@ C {lab_wire.sym} 460 -620 0 0 {name=p13 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 300 -150 0 0 {name=p14 sig_type=std_logic lab=GND}
 C {lab_wire.sym} 240 -150 0 0 {name=p15 sig_type=std_logic lab=GND}
 C {noconn.sym} 640 -450 0 0 {name=l3}
+C {mux4/gf180mcu_osu_sc_gp9t3v3__mux4_1.sym} 740 -460 0 0 {name=x2}
+C {capa.sym} 590 -390 0 0 {name=C1
+m=1
+value=1.5f
+footprint=1206
+device="ceramic capacitor"}
+C {lab_wire.sym} 590 -320 0 0 {name=p16 sig_type=std_logic lab=GND}

@@ -30,7 +30,7 @@ Show: 1			# Shown during rendering
 LayerEnd
 
 LayerStart: P-Plus
-Layer: 2
+Layer: 31
 Height: 220
 Thickness: 100
 Red: 0.05
@@ -42,7 +42,7 @@ Show: 1
 LayerEnd
 
 LayerStart: N-Plus
-Layer: 3
+Layer: 32
 Height: 220
 Thickness: 100
 Red: 0.99
