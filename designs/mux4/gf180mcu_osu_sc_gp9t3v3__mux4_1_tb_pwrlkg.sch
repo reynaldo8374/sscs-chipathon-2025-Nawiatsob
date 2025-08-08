@@ -52,7 +52,7 @@ value="
 .include $::180MCU_MODELS/design.ngspice
 .lib $::180MCU_MODELS/sm141064.ngspice typical
 "}
-C {devices/code_shown.sym} 715 -945 0 0 {name=NGSPICE only_toplevel=true
+C {devices/code_shown.sym} 705 -945 0 0 {name=NGSPICE only_toplevel=true
 value="
 .control
 save all
@@ -85,6 +85,7 @@ repeat 64
   let leakage_power = abs(I(V1))*VDD
   let total_leakage = total_leakage + leakage_power
   print leakage_power
+  echo $&logic_s1$&logic_s0$&logic_D$&logic_C$&logic_B$&logic_A  $&leakage_power >> hasil.txt
   let idx = $&idx + 1
 end
 
