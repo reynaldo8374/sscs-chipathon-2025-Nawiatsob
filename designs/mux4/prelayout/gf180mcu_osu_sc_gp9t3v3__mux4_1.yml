@@ -1,6 +1,6 @@
 settings:
   lib_name: gf180mcu_osu_sc_gp9t3v3__mux4_1
-  results_dir: /foss/designs/mux4
+  results_dir: /foss/designs/mux4/prelayout
   omit_on_failure: true
   units:
     time: ns
@@ -33,7 +33,7 @@ settings:
 
 cells:
   gf180mcu_osu_sc_gp9t3v3__mux4_1:
-    netlist: /foss/designs/mux4/gf180mcu_osu_sc_gp9t3v3__mux4_1.spice
+    netlist: /foss/designs/mux4/prelayout/gf180mcu_osu_sc_gp9t3v3__mux4_1.spice
     area: 100
     inputs: [S0, S1, I0, I1, I2, I3]
     outputs: ['Y']

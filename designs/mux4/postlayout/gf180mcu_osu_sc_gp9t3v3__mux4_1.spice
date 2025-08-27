@@ -1,5 +1,5 @@
 * SPICE3 file created from gf180mcu_osu_sc_gp9t3v3__mux4_1.ext - technology: gf180mcuD
-
+.subckt gf180mcu_osu_sc_gp9t3v3__mux4_1 VSS i0 VDD s0 i1 y i2 s1 i3
 X0 a_2640_210# a_2070_210# VDD VDD pfet_03v3 ad=0.85p pd=4.4u as=0.85p ps=4.4u w=1.7u l=0.3u
 X1 i1 s0 a_590_210# VSS nfet_03v3 ad=0.5525p pd=3u as=0.2975p ps=1.55u w=0.85u l=0.3u
 X2 i3 s0 a_1160_210# VSS nfet_03v3 ad=0.5525p pd=3u as=0.2975p ps=1.55u w=0.85u l=0.3u
@@ -105,3 +105,4 @@ C81 a_2640_210# VSS 0.60843f
 C82 a_2070_210# VSS 0.48425f
 C83 a_1730_210# VSS 0.54619f
 C84 a_250_210# VSS 1.01684f
+.ends
