@@ -1,7 +1,7 @@
 magic
 tech gf180mcuD
 magscale 1 10
-timestamp 1755791159
+timestamp 1756282050
 << nwell >>
 rect 0 624 3170 1270
 << nmos >>
@@ -899,22 +899,22 @@ rect 1175 263 2395 268
 rect 1175 254 1255 263
 rect 2315 255 2395 263
 << labels >>
-flabel metal1 132 96 132 96 2 FreeSans 73 0 0 0 VSS
-port 12 s ground bidirectional abutment
-flabel metal1 139 1179 139 1179 2 FreeSans 73 0 0 0 VDD
-port 10 n power bidirectional abutment
-flabel metal2 3048 619 3048 619 2 FreeSans 89 0 0 0 y
-port 11 e signal output
-flabel metal2 861 297 861 297 2 FreeSans 89 0 0 0 i1
-port 14 w signal input
-flabel metal2 476 298 476 298 2 FreeSans 89 0 0 0 i0
-port 13 w signal input
-flabel metal2 1038 325 1038 325 2 FreeSans 89 0 0 0 i2
-port 15 w signal input
-flabel metal2 1496 447 1496 447 2 FreeSans 89 0 0 0 i3
-port 17 w signal input
-flabel metal2 1657 610 1657 610 2 FreeSans 89 0 0 0 s1
-port 16 w signal input
-flabel metal2 120 579 120 579 2 FreeSans 89 0 0 0 s0
-port 9 w signal input
+flabel metal1 s 132 96 132 96 2 FreeSans 73 0 0 0 VSS
+port 1 nsew
+flabel metal1 s 139 1179 139 1179 2 FreeSans 73 0 0 0 VDD
+port 2 nsew
+flabel metal2 s 3048 619 3048 619 2 FreeSans 89 0 0 0 y
+port 3 nsew
+flabel metal2 s 861 297 861 297 2 FreeSans 89 0 0 0 i1
+port 4 nsew
+flabel metal2 s 476 298 476 298 2 FreeSans 89 0 0 0 i0
+port 5 nsew
+flabel metal2 s 1038 325 1038 325 2 FreeSans 89 0 0 0 i2
+port 6 nsew
+flabel metal2 s 1496 447 1496 447 2 FreeSans 89 0 0 0 i3
+port 7 nsew
+flabel metal2 s 1657 610 1657 610 2 FreeSans 89 0 0 0 s1
+port 8 nsew
+flabel metal2 s 120 579 120 579 2 FreeSans 89 0 0 0 s0
+port 9 nsew
 << end >>
